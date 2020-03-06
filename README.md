@@ -2,6 +2,10 @@
 
 可能是世界上最小巧的小程序功能增强库.
 
+## install
+
+`npm i @matrixage/moon`
+
 ## usage
 
 ### moon (全局状态管理)
