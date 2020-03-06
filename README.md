@@ -20,7 +20,7 @@ const { moon } = require('@matrixage/moon')
 App({
 	onLaunch () {
 		moon(wx).define({
-            userinfo:{},
+            		userinfo:{},
 			loaded: false
 		})
 	}
