@@ -6,3 +6,8 @@ node_modules
 
 # log
 *.log
+
+#out
+miniprogram_dist
+
+package-lock.json
