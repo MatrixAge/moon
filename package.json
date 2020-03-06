@@ -1,5 +1,5 @@
 {
-      "name": "moon",
+      "name": "@matrixage/moon",
       "version": "1.0.0",
       "description": "可能是世界上最小巧的小程序功能增强库",
       "miniprogram": "dist",
