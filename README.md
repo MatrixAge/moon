@@ -18,7 +18,7 @@ const moon = require('moon')
 App({
 	onLaunch () {
 		moon(wx).define({
-                  userinfo:{},
+                  	userinfo:{},
 			loaded: false
 		})
 	}
