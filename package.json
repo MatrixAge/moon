@@ -1,11 +1,11 @@
 {
       "name": "@matrixage/moon",
-      "version": "1.0.2",
+      "version": "1.0.8",
       "description": "可能是世界上最小巧的小程序功能增强库",
       "main": "miniprogram_dist/index.js",
       "types": "miniprogram_dist/index.d.ts",
       "scripts": {
-            "build": "npx babel src -d miniprogram_dist -x \".ts\" --plugins=@babel/plugin-transform-modules-umd",
+            "build": "npx babel src -d miniprogram_dist -x \".js\"",
             "test": "echo \"Error: no test specified\" && exit 1"
       },
       "repository": {
@@ -27,8 +27,6 @@
       "devDependencies": {
             "@babel/cli": "^7.8.4",
             "@babel/core": "^7.8.7",
-            "@babel/plugin-transform-modules-umd": "^7.8.3",
-            "@babel/preset-env": "^7.8.7",
-            "@babel/preset-typescript": "^7.8.3"
+            "@babel/preset-env": "^7.8.7"
       }
 }
