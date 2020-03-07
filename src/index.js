@@ -1,5 +1,6 @@
 module.exports = {
 	moon: require('./core/index'),
-	promisify: require('./promisify/index').promisify,
+	connect: require('./connect/index'),
+	modelExtend: require('./modelExtend/index'),
 	promisifyAll: require('./promisify/index').promisifyAll
 }

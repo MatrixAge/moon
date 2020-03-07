@@ -6,7 +6,7 @@
 
 1. `npm i @matrixage/moon`
 
-2. 微信开发这工具 -> 工具 -> 构建npm
+2. 微信开发者工具 -> 工具 -> 构建npm
 
 ## usage
 
@@ -15,7 +15,7 @@
 1. 在app.js中定义全局变量
 
 ```js
-const { moon } = require('@matrixage/moon')
+import { moon } from '@matrixage/moon'
 
 App({
 	onLaunch () {
@@ -47,12 +47,90 @@ wx.$watch('loaded',(new_val,old_val)=>{
 })
 ```
 
+### connect (支持dva model)
+
+页面的js文件 (index.js)
+
+```js
+import { connect } from require('@matrixage/moon')
+import model from './model'
+
+const page = {
+	onLoad () {
+		this.dispatch({
+			type: 'showLoading'
+		})
+	}
+}
+
+connect(page, model)
+```
+
+页面的model文件 (model.js)
+
+```js
+import { Service_getContent, Service_getUserinfo } from './services'
+
+export default {
+	data: {
+		list: [],
+		userinfo: {},
+		loading: false
+	},
+
+	effects: {
+		async query ({ payload }) {
+			const { result, success } = await Service_getContent({ type: 1 })
+
+			if (!success) return
+
+			this.setData({
+				list: result
+			})
+		},
+		async getUserinfo () {
+             const {result, success} = await Service_getUserinfo()
+                  
+            if (!success) return
+                  
+			this.setData({
+				userinfo: result
+			})
+		}
+	},
+
+	reducers: {
+		showLoading () {
+			this.setData({ loading: true })
+		},
+		hideLoading () {
+			this.setData({ loading: false })
+		}
+	}
+}
+```
+
+在index.js中使用`this.dispatch({type,payload})`调用model.js中的函数,在model.js中直接使用`this.setData({data})`对数据进行变更。
+
+index.html负责视图展现 (view)，index.js负责页面逻辑 (controller)，model.js负责数据逻辑 (model)。基于“0入侵”的原则，简化了dva的一些概念，尽可能地让经验较少的开发者也能体会到标准MVC编程的快乐。
+
+### modelExtend (扩展model)
+
+```js
+import { modelExtend } from '@matrixage/modelExtend'
+import model from 'path/to/public_model'
+
+export default modelExtend(model,{
+      ...
+})
+```
+
 ### promisifyAll (Promise化wxapi )
 
 1. 在app.js onLaunch函数的第一行执行绑定
 
 ```js
-const { promisifyAll } = require('@matrixage/moon')
+import { promisifyAll } from '@matrixage/moon'
 
 App({
 	onLaunch () {
@@ -90,18 +168,24 @@ declare namespace WechatMiniprogram {
             $getData: object
       }
 }
+
+interface IModel {
+      data:object
+      effects:object
+      reducers:object
+}
+
+declare module '@matrixage/moon'{
+      export const moon:(wx:any)=>void
+      export const connect:(page:object,model:object)=>any
+      export const modelExtend:(public_model:IModel,public_model:IModel)=>IModel
+      export const promisifyAll:(wx:any,wx$:any)=>void
+}
 ```
-
-## 后续计划
-
-* connect函数
-* dispatch函数
-
-学习dva的思想，为小程序提供model层的数据控制能力.
 
 ## 理念
 
-moon将始终保持小而美，要保证使用moon不会对现有代码造成侵入式破坏.
+moon将始终保持小而美，要保证使用moon不会对现有代码造成任何侵入式破坏.
 
 
 
