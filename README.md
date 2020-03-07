@@ -1,6 +1,6 @@
 # moon
 
-可能是世界上最小巧的小程序功能增强库.
+可能是世界上最小巧的小程序功能增强库. https://github.com/MatrixAge/moon
 
 ## install
 
@@ -187,7 +187,7 @@ interface IModel {
 declare module '@matrixage/moon'{
       export const moon:(wx:any)=>void
       export const connect:(page:object,model:object)=>any
-      export const modelExtend:(public_model:IModel,public_model:IModel)=>IModel
+      export const modelExtend:(page_model:IModel,public_model:IModel)=>IModel
       export const promisifyAll:(wx:any,wx$:any)=>void
 }
 ```
