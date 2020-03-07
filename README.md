@@ -52,13 +52,16 @@ wx.$watch('loaded',(new_val,old_val)=>{
 页面的js文件 (index.js)
 
 ```js
-import { connect } from require('@matrixage/moon')
+import { connect } from '@matrixage/moon'
 import model from './model'
 
 const page = {
 	onLoad () {
 		this.dispatch({
-			type: 'showLoading'
+                  type: 'query',
+                  payload:{
+                        shop_id: 1
+                  }
 		})
 	}
 }
@@ -80,7 +83,7 @@ export default {
 
 	effects: {
 		async query ({ payload }) {
-			const { result, success } = await Service_getContent({ type: 1 })
+			const { result, success } = await Service_getContent(Object.assign(payload,{ type: 1 }))
 
 			if (!success) return
 
@@ -109,6 +112,12 @@ export default {
 	}
 }
 ```
+
+model只支持三种对象：
+
+* data (同小程序data)
+* effects (异步方法，通常用于获取异步数据)
+* reducers (同步方法，通常用于控制模态框或是loading的显示隐藏)
 
 在index.js中使用`this.dispatch({type,payload})`调用model.js中的函数,在model.js中直接使用`this.setData({data})`对数据进行变更。
 
