@@ -58,10 +58,10 @@ import model from './model'
 const page = {
 	onLoad () {
 		this.dispatch({
-                  type: 'query',
-                  payload:{
-                        shop_id: 1
-                  }
+                	type: 'query',
+                  	payload:{
+                        	shop_id: 1
+                  	}
 		})
 	}
 }
@@ -92,9 +92,9 @@ export default {
 			})
 		},
 		async getUserinfo () {
-             const {result, success} = await Service_getUserinfo()
+                        const {result, success} = await Service_getUserinfo()
                   
-            if (!success) return
+                        if (!success) return
                   
 			this.setData({
 				userinfo: result
